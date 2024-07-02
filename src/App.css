@@ -29,7 +29,7 @@ html, body {
 .box {
   background-color: lightgray;
   width: 100px;
-  height: 100px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,10 @@ html, body {
 }
 
 .box-label {
+  position: absolute;
+  top: 20px;
   font-size: 14px;
   color: black;
   text-align: center;
+  width: 100%;
 }
