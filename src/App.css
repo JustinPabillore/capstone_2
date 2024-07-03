@@ -1,12 +1,11 @@
-html, body {
+body, html {
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
+  overflow-x: hidden;
 }
 
 .main-container {
-  background-color: #0b1933;
+  background-color: #1A1851;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -22,25 +21,86 @@ html, body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 10px;
+  /* padding: 10px; */
   box-sizing: border-box;
+  border-bottom: 2px solid white; /* Add a white bottom border */
 }
 
-.box {
-  background-color: lightgray;
-  width: 100px;
-  height: 120px;
+.box1 {
+  background-color: #1A1851;
+  width: 135px;
+  height: 155px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ccc;
+  border: 1px solid white;
+  border-top: none;
+  border-bottom: none;
 }
 
-.box-label {
+.box1-label {
   position: absolute;
   top: 20px;
-  font-size: 14px;
-  color: black;
+  font-size: 18px;
+  color: #FCB315;
   text-align: center;
   width: 100%;
+  font-weight: 800;
+}
+
+/* Remove left border for the first box */
+.top-container .box:first-child {
+  border-left: none;
+}
+
+/* Remove right border for the last box */
+.top-container .box:last-child {
+  border-right: none;
+}
+
+.mid1-container {
+ width: 100%;
+  height: 40px;
+  background-color: #1A1851;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid white;
+}
+
+.mid1-text {
+  color: #FCB315;
+  font-size: 17px;
+  letter-spacing: 5px;
+  font-weight: 900;
+}
+
+.mid2-container {
+  width: 100%;
+  height: 155px;
+  background-color: #1A1851;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid white;
+}
+
+.box2 {
+  background-color: white;
+  width: 338px;
+  height: 155px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+}
+
+.box2-label {
+  /* position: absolute; */
+  top: 20px;
+  font-size: 18px;
+  color: #fcb414;
+  text-align: center;
+  width: 100%;
+  font-weight: 1000;
 }
