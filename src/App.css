@@ -21,15 +21,14 @@ body, html {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  /* padding: 10px; */
   box-sizing: border-box;
-  border-bottom: 2px solid white; /* Add a white bottom border */
+  border-bottom: 2px solid white;
 }
 
 .box1 {
   background-color: #1A1851;
   width: 135px;
-  height: 155px;
+  height: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,12 +48,12 @@ body, html {
 }
 
 /* Remove left border for the first box */
-.top-container .box:first-child {
+.top-container .box1:first-child {
   border-left: none;
 }
 
 /* Remove right border for the last box */
-.top-container .box:last-child {
+.top-container .box1:last-child {
   border-right: none;
 }
 
@@ -65,7 +64,6 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 2px solid white;
 }
 
 .mid1-text {
@@ -73,34 +71,81 @@ body, html {
   font-size: 17px;
   letter-spacing: 5px;
   font-weight: 900;
+  text-align: center;
 }
 
 .mid2-container {
   width: 100%;
-  height: 155px;
+  height: 390px;
   background-color: #1A1851;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid white;
 }
 
 .box2 {
   background-color: white;
-  width: 338px;
-  height: 155px;
+  width: 335px;
+  height: 390px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid white;
 }
 
 .box2-label {
-  /* position: absolute; */
   top: 20px;
   font-size: 18px;
   color: #fcb414;
   text-align: center;
   width: 100%;
   font-weight: 1000;
+}
+
+/* Add left margin for the first box in mid2-container */
+.mid2-container .box2:first-child {
+  margin-left: 5px; /* Adjust the value as needed */
+}
+
+/* Add right margin for the last box in mid2-container */
+.mid2-container .box2:last-child {
+  margin-right: 5px; /* Adjust the value as needed */
+}
+
+.bottom-container {
+  width: 100%;
+  height: 60px;
+  background-color: #1A1851;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px; /* Adjust padding as needed */
+  box-sizing: border-box;
+}
+
+.bottom-left,
+.bottom-middle,
+.bottom-right {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.bottom-right {
+  display: flex;
+  align-items: center;
+}
+
+.view-records-btn {
+  background-color: #FCB315;
+  color: #1A1851;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.view-records-btn:hover {
+  background-color: #fcb414;
 }

@@ -52,6 +52,17 @@ function App() {
           <label className="box2-label">BOX 4</label>
         </div>
       </div>
+      <div className="bottom-container">
+        <div className="bottom-left">
+          Total Entry: 
+        </div>
+        <div className="bottom-middle">
+          Total Exit: 
+        </div>
+        <div className="bottom-right">
+          <button className="view-records-btn">View Records</button>
+        </div>
+      </div>
     </div>
   );
 }
