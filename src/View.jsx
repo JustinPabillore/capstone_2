@@ -34,10 +34,6 @@ const View = () => {
         </div>
       </div>
       <div className="right-container2">
-        <h2>Right Container</h2>
-        <div>
-          <p>This is the right container.</p>
-        </div>
       </div>
     </div>
   );
