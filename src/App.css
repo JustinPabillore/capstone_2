@@ -45,15 +45,17 @@ body, html {
   color: #FCB315;
   text-align: center;
   width: 100%;
-  font-weight: 800;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
 }
 
 .box1-count {
-  font-size: 24px;
+  font-size: 26px;
   color: white;
   font-weight: bold;
   position: absolute;
   bottom: 30px;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Remove left border for the first box */
@@ -81,6 +83,7 @@ body, html {
   letter-spacing: 5px;
   font-weight: 900;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .mid2-container {
@@ -108,6 +111,7 @@ body, html {
   text-align: center;
   width: 100%;
   font-weight: 1000;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Add left margin for the first box in mid2-container */
@@ -137,6 +141,7 @@ body, html {
   color: #fcb414;
   font-size: 22px;
   font-weight: bold;
+  font-family: 'Poppins', sans-serif;
 }
 
 .bottom-right {
@@ -153,6 +158,7 @@ body, html {
   cursor: pointer;
   border-radius: 5px;
   text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
 }
 
 .view-records-btn:hover {
@@ -186,6 +192,7 @@ body, html {
   color: #fcb414;
   margin-bottom: 10px;
   letter-spacing: 3px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .modal-content label {

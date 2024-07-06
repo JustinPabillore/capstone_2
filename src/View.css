@@ -41,14 +41,15 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ccc; /* Border for the box */
-    background-color: #1A1851; /* Light grey background for the box */
+    border: 1px solid #ccc;
+    background-color: #1A1851;
     text-align: center;
     color: #FCB315;
     font-size: 28px;
     font-weight: 700;
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .box:hover {
