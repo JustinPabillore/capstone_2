@@ -1,5 +1,7 @@
+// src/App.jsx
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
-import { useState } from 'react';
 
 function App() {
   const [counts, setCounts] = useState({
@@ -20,15 +22,15 @@ function App() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
     if (username === 'admin' && password === 'admin') {
-      alert('Login successful!');
       setShowLoginModal(false);
       setLoginError('');
-      return true;
+      navigate('/view');
     } else {
       setLoginError('Invalid username or password');
-      return false;
     }
   };
 
@@ -81,13 +83,13 @@ function App() {
       {showLoginModal && (
         <div className="modal">
           <div className="modal-content">
-          <h2 className="modal-title">ADMIN LOGIN</h2>
+            <h2 className="modal-title">ADMIN LOGIN</h2>
             <label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter username"
+                placeholder="Username"
               />
             </label>
             <label>
@@ -95,7 +97,7 @@ function App() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password"
+                placeholder="Password"
               />
             </label>
             {loginError && <p className="error">{loginError}</p>}
