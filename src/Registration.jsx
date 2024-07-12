@@ -14,7 +14,17 @@ function Registration() {
       </div>
       <div className="bottom-container">
         <div className="left-container">
-          {/* Add content for the left container here */}
+          <div className="box">
+            <div className="box-title">REGISTER</div>
+            <form className="form">
+              <input type="text" className="input-fields" placeholder="Field 1" />
+              <input type="text" className="input-fields" placeholder="Field 2" />
+              <input type="text" className="input-fields" placeholder="Field 3" />
+              <input type="text" className="input-fields" placeholder="Field 4" />
+              <input type="text" className="input-fields" placeholder="Field 5" />
+              <button type="submit" className="submit-button">Submit</button>
+            </form>
+          </div>
         </div>
         <div className="right-container">
           {/* Add content for the right container here */}
