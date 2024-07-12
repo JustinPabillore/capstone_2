@@ -51,22 +51,22 @@ body, html {
 
 .box1-count {
   font-size: 26px;
-  color: white;
+  color: #FCB315;
   font-weight: bold;
   position: absolute;
   bottom: 30px;
   font-family: 'Poppins', sans-serif;
 }
 
-/* Remove left border for the first box */
+/* Remove left border for the first box
 .top-container .box1:first-child {
   border-left: none;
 }
 
 /* Remove right border for the last box */
-.top-container .box1:last-child {
+/* .top-container .box1:last-child {
   border-right: none;
-}
+} */
 
 .mid1-container {
   width: 100%;
@@ -203,16 +203,16 @@ body, html {
 .modal-content input {
   width: calc(100% - 26px);
   padding: 12px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: white;
   color: black;
+  font-size: 16px;
 }
 
 .modal-content .error {
   color: red;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .modal-content button {
