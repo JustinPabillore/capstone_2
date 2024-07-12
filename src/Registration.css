@@ -78,21 +78,23 @@ body, html {
   margin-right: -5px;
 }
 
-.box {
-  width: 80%;
-  padding: 20px;
+.m-box {
+  width: 90%;
+  height: 90%;
+  padding: 10px;
   box-sizing: border-box;
-  border: 2px solid #000000;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.box-title {
-  font-size: 24px;
+.m-box-title {
+  font-size: 30px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #1A1851;
+  font-family: 'Poppins', sans-serif;
 }
 
 .form {
@@ -104,14 +106,20 @@ body, html {
 
 .input-fields {
   width: 100%;
+  height: auto;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #000000;
-  border-radius: 5px;
   box-sizing: border-box;
+  background-color: #FCB315;
+  color: black;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
 }
 
-.submit-button {
+.r-submit-button {
   align-self: flex-end;
   padding: 10px 20px;
   background-color: #1A1851;
@@ -120,9 +128,19 @@ body, html {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
 }
 
-.submit-button:hover {
+.r-submit-button:hover {
   background-color: #FCB315;
   color: #1A1851;
+}
+
+.l-box-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1A1851;
+  font-family: 'Poppins', sans-serif;
 }
