@@ -228,3 +228,24 @@ body, html {
 .modal-content button:hover {
   background-color: #fcb414;
 }
+
+
+.scanned-data-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto; /* Scroll if there are too many items */
+}
+
+.scanned-data-item {
+  font-size: 16px;
+  color: #000;
+  background-color: #FCB315;
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+}
