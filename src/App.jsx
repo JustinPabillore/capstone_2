@@ -20,6 +20,7 @@ function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [box1Input, setBox1Input] = useState(''); // State for the input field in box1
 
   const navigate = useNavigate();
 
@@ -55,7 +56,14 @@ function App() {
       </div>
       <div className="mid2-container">
         <div className="box2">
-          <label className="box2-label">BOX 1</label>
+          <label className="box2-label"></label>
+          <input
+            type="text"
+            value={box1Input}
+            onChange={(e) => setBox1Input(e.target.value)} // Handle input value change
+            placeholder="Enter"
+            className="b1"
+          />
         </div>
         <div className="box2">
           <label className="box2-label">BOX 2</label>

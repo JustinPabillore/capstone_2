@@ -100,6 +100,7 @@ body, html {
   width: 335px;
   height: 390px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -248,4 +249,15 @@ body, html {
   margin: 5px 0;
   border-radius: 5px;
   font-family: 'Poppins', sans-serif;
+}
+
+.b1 {
+  width: 80%;
+  padding: 10px;
+  margin-top: 20px;
+  border: 2px solid #FCB315;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
 }
