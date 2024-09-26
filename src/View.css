@@ -26,7 +26,10 @@ body, html {
     padding: 20px;
     box-sizing: border-box;
     border-left: 1px solid white;
+    height: 100%;
+    overflow-y: auto;
 }
+
 
 .grid-container {
     display: grid;
@@ -53,4 +56,30 @@ body, html {
 .box:hover {
     color: black;
     background-color: #FCB315;
+}
+.visitor-box {
+    grid-column: 1 / 4;
+    grid-row: 4;
+    height: 130px
+}
+.course-list h3 {
+    margin: 0 0 10px;
+    font-size: 35px;
+}
+.course-list {
+    padding: 10px;
+    background-color: #1A1851;
+    color: #FCB315;
+    margin-top: 20px;
+}
+
+.course-list ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove default padding */
+}
+
+.course-list li {
+    margin: 5px 0; /* Space between list items */
+    font-size: 20px; /* Adjust font size for courses */
+    line-height: 2.5; /* Optional: Increase line height for better readability */
 }
