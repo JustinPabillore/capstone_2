@@ -23,7 +23,7 @@ body, html {
 
 .right-container2 {
     flex: 1;
-    padding: 20px;
+    padding: 1px;
     box-sizing: border-box;
     border-left: 1px solid white;
     height: 100%;
@@ -33,9 +33,9 @@ body, html {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    grid-template-rows: repeat(3, 1fr); /* 3 rows */
-    height: 100%;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    grid-template-rows: repeat(4, 1fr); /* Adjust rows as needed to create enough space */
+    height: 100%; /* Ensure full height */
 }
 
 .box {
@@ -58,13 +58,24 @@ body, html {
     background-color: #FCB315;
 }
 .visitor-box {
-    grid-column: 1 / 4;
-    grid-row: 4;
-    height: 130px
+    grid-column: 1 / -1; /* Make it span all columns */
+    grid-row: 4; /* Position it in the fourth row */
+    justify-content: center;
+    border: 1px solid #ccc;
+    background-color: #1A1851;
+    text-align: center;
+    color: #FCB315;
+    font-size: 28px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+
 }
 .course-list h3 {
     margin: 0 0 10px;
     font-size: 35px;
+    text-align: center;
 }
 .course-list {
     padding: 10px;
@@ -74,12 +85,52 @@ body, html {
 }
 
 .course-list ul {
-    list-style-type: none; /* Remove bullets */
-    padding: 0; /* Remove default padding */
+    list-style-type: none;
+    padding: 0;
 }
 
 .course-list li {
-    margin: 5px 0; /* Space between list items */
-    font-size: 20px; /* Adjust font size for courses */
-    line-height: 2.5; /* Optional: Increase line height for better readability */
+    margin: 3px 0;
+    font-size: 19px;
+    line-height: 2.5;
+}
+
+.logout-button {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #FCB315;
+    background-color: #1A1851;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logout-button:hover {
+    color: black;
+    background-color: #FCB315;
+}
+
+.generate-record-button {
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #FCB315;
+    background-color: #1A1851;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.generate-record-button:hover {
+    color: black;
+    background-color: #FCB315;
 }

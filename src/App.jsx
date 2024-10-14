@@ -10,6 +10,7 @@ function App() {
     COM: 0,
     CSM: 0,
     CEA: 0,
+    IGIS: 0,
     SHS: 0,
     EMPLOYEE: 0,
     VISITOR: 0,
@@ -20,8 +21,7 @@ function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
-  const [box1Input, setBox1Input] = useState(''); // State for the input field in box1
-
+  const [box1Input, setBox1Input] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = () => {

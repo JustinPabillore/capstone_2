@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './View.css';
 
 const labels = [
@@ -10,8 +11,8 @@ const labels = [
   "CEA",
   "IGIS",
   "SHS",
-  "EMPLOYEE",
-  "VISITOR"
+  "EMPLOYEES",
+  "VISITORS"
 ];
 
 // CITC Courses
@@ -57,7 +58,7 @@ const csteCourses = [
   "M.S in Teaching Physical Science (Physics)",
   "Master in Education Planning & Management",
   "Master in Technician Teacher Education",
-  "Master in Technician Teacher Education -ALL",
+  "Master in Technician Teacher Education - ALL",
   "Master of Science in Education Planning and Administration",
   "Master of Science in Mathematics Education",
   "Master of Science in Science Education",
@@ -114,10 +115,21 @@ const igisCourses = [
 
 // SHS
 const shsStrand = [
-  " Senior High School - STEM"
+  "Senior High School - STEM"
+];
+
+// Employee
+const employees = [
+  "Employees"
+];
+
+// Visitors
+const visitors = [
+  "Visitors"
 ];
 
 const View = () => {
+  const navigate = useNavigate(); // Create a navigate function
   const [selectedLabel, setSelectedLabel] = useState(null);
   const courseListRef = useRef(null); // Create a reference for the course list
 
@@ -142,14 +154,27 @@ const View = () => {
       courses = igisCourses;
     } else if (label === "SHS") {
       courses = shsStrand;
+    } else if (label === "EMPLOYEES") {
+      courses = employees;
+    } else if (label === "VISITORS") {
+      courses = visitors;
     } else {
-      courses = null; // Clear selection for other labels
+      courses = null;
     }
 
-    setSelectedLabel(courses); // Update the selected label
+    setSelectedLabel(courses);
     if (courseListRef.current) {
-      courseListRef.current.scrollTop = 0; // Scroll to the top of the right container
+      courseListRef.current.scrollTop = 0;
     }
+  };
+
+  const handleLogout = () => {
+    navigate('/'); // Navigate back to the main app (App.jsx)
+  };
+
+  const handleGenerateRecord = () => {
+    // Add your record generation logic here
+    console.log("Generate Record button clicked");
   };
 
   return (
@@ -157,13 +182,18 @@ const View = () => {
       <div className="left-container2">
         <div className="grid-container">
           {labels.map((label, index) => (
-            <div key={index} className={`box ${label === "VISITOR" ? "visitor-box" : ""}`} onClick={() => handleClick(label)}>
+            <div
+              key={index}
+              className={`box ${label === "VISITORS" ? "visitor-box" : ""}`}
+              onClick={() => handleClick(label)}
+            >
               {label}
             </div>
           ))}
         </div>
       </div>
-      <div className="right-container2" ref={courseListRef}> {/* Attach ref here */}
+      <div className="right-container2" ref={courseListRef}>
+        <button className="logout-button" onClick={handleLogout}>Logout</button>
         {selectedLabel && (
           <div className="course-list">
             <h3>
@@ -174,15 +204,20 @@ const View = () => {
                selectedLabel === csmCourses ? "CSM" :
                selectedLabel === ceaCourses ? "CEA" :
                selectedLabel === igisCourses ? "IGIS" :
-               "SHS"}
+               selectedLabel === shsStrand ? "SHS" :
+               selectedLabel === employees ? "EMPLOYEES" :
+               "VISITORS"}
             </h3>
             <ul>
               {selectedLabel.map((course, index) => (
-                <li key={index}>{course}</li>
+                <li key={index}>
+                  {course} - 0
+                </li>
               ))}
             </ul>
           </div>
         )}
+        <button className="generate-record-button" onClick={handleGenerateRecord}>Generate Record</button>
       </div>
     </div>
   );
