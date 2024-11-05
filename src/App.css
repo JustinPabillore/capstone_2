@@ -104,6 +104,10 @@ body, html {
   align-items: center;
   justify-content: center;
 }
+#box-1 { float: right; }
+#box-2 { float: left; }
+#box-3 { float: left; }
+#box-4 { float: left; }
 
 .box2-label {
   top: 20px;
@@ -261,3 +265,4 @@ body, html {
   background-color: white;
   color: black;
 }
+
