@@ -16,26 +16,26 @@ body, html {
 
 .left-container2 {
     flex: 1;
-    padding: 0px;
+    padding: 0;
     box-sizing: border-box;
     border-right: 1px solid white;
 }
 
 .right-container2 {
     flex: 1;
-    padding: 1px;
+    padding: 20px;
     box-sizing: border-box;
     border-left: 1px solid white;
     height: 100%;
     overflow-y: auto;
+    max-height: 90vh;
 }
-
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-    grid-template-rows: repeat(4, 1fr); /* Adjust rows as needed to create enough space */
-    height: 100%; /* Ensure full height */
+    grid-template-rows: repeat(4, 1fr); /* Adjust rows to create enough space */
+    height: 100%;
 }
 
 .box {
@@ -53,13 +53,14 @@ body, html {
     font-family: 'Poppins', sans-serif;
 }
 
-.box:hover {
+.box:hover, .logout-button:hover, .generate-record-button:hover {
     color: black;
     background-color: #FCB315;
 }
+
 .visitor-box {
-    grid-column: 1 / -1; /* Make it span all columns */
-    grid-row: 4; /* Position it in the fourth row */
+    grid-column: 1 / -1; /* Span all columns */
+    grid-row: 4;
     justify-content: center;
     border: 1px solid #ccc;
     background-color: #1A1851;
@@ -70,19 +71,19 @@ body, html {
     cursor: pointer;
     transition: opacity 0.3s ease;
     font-family: 'Poppins', sans-serif;
+}
 
-}
-.course-list h3 {
-    margin: 0 0 10px;
-    font-size: 35px;
-    text-align: center;
-}
 .course-list {
     padding: 10px;
     background-color: #1A1851;
     color: #FCB315;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin: 20px 0 30px;
+}
+
+.course-list h3 {
+    margin: 0 0 10px;
+    font-size: 35px;
+    text-align: center;
 }
 
 .course-list ul {
@@ -96,10 +97,40 @@ body, html {
     line-height: 2.5;
 }
 
-.logout-button {
-    position: absolute;
-    top: 15px;
-    right: 30px;
+h2 {
+    color: #FCB315;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1A1851;
+    color: #FCB315;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logs-table th, .logs-table td {
+    padding: 12px;
+    border: 1px solid #FCB315;
+    text-align: left;
+    font-size: 18px;
+}
+
+.logs-table th {
+    background-color: #292759;
+    font-weight: 700;
+}
+
+/* .logs-table tr:hover {
+    background-color: #FCB315;
+    color: #1A1851;
+} */
+
+.logout-button, .generate-record-button {
     padding: 10px 20px;
     font-size: 18px;
     color: #FCB315;
@@ -111,27 +142,14 @@ body, html {
     font-family: 'Poppins', sans-serif;
 }
 
-.logout-button:hover {
-    color: black;
-    background-color: #FCB315;
+.logout-button {
+    position: absolute;
+    top: 15px;
+    right: 30px;
 }
 
 .generate-record-button {
     position: absolute;
     bottom: 10px;
     right: 30px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #FCB315;
-    background-color: #1A1851;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-    font-family: 'Poppins', sans-serif;
-}
-
-.generate-record-button:hover {
-    color: black;
-    background-color: #FCB315;
 }
