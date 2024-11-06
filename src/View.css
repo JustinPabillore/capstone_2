@@ -95,6 +95,13 @@ body, html {
     margin: 3px 0;
     font-size: 19px;
     line-height: 2.5;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.course-list li:hover {
+    color: black;
+    background-color: #FCB315;
 }
 
 h2 {

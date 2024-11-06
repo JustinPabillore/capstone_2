@@ -159,7 +159,7 @@ const View = () => {
             <ul>
               {selectedLabel.map((course, index) => (
                 <li key={index} onClick={() => handleCourseClick(course)}>
-                  {course}
+                  {course} - 0
                 </li>
               ))}
             </ul>
