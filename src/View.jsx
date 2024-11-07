@@ -106,12 +106,14 @@ const courses = {
 const View = () => {
   const navigate = useNavigate();
   const [selectedLabel, setSelectedLabel] = useState(null);
+  const [currentLabelName, setCurrentLabelName] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [logs, setLogs] = useState([]);
   const courseListRef = useRef(null);
 
   const handleLabelClick = (label) => {
     setSelectedLabel(courses[label] || []);
+    setCurrentLabelName(label); // Set current label name
     setSelectedCourse(null); // Reset course selection
     setLogs([]); // Clear logs when a new label is selected
     if (courseListRef.current) courseListRef.current.scrollTop = 0;
@@ -150,12 +152,13 @@ const View = () => {
         </div>
       </div>
       <div className="right-container2" ref={courseListRef}>
+      <button className="generate-record-button">Generate Record</button>
         <button className="logout-button" onClick={handleLogout}>Logout</button>
         
         {/* Show list of courses if a label is selected and no course is yet selected */}
         {selectedLabel && !selectedCourse && (
           <div className="course-list">
-            <h3>Courses</h3>
+            <h3>{currentLabelName}</h3>
             <ul>
               {selectedLabel.map((course, index) => (
                 <li key={index} onClick={() => handleCourseClick(course)}>
@@ -192,11 +195,8 @@ const View = () => {
                 ))}
               </tbody>
             </table>
-            {/* <button onClick={() => setSelectedCourse(null)}>Back to Courses</button> */}
           </div>
         )}
-        
-        <button className="generate-record-button">Generate Record</button>
       </div>
     </div>
   );
