@@ -3,16 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './View.css';
 
 const labels = [
-  "CITC",
-  "COT",
-  "CSTE",
-  "COM",
-  "CSM",
-  "CEA",
-  "IGIS",
-  "SHS",
-  "EMPLOYEES",
-  "VISITORS"
+  "CITC", "COT", "CSTE", "COM", "CSM", "CEA", "IGIS", "SHS", "EMPLOYEES", "VISITORS"
 ];
 
 // Define courses for each label
@@ -55,7 +46,6 @@ const courses = {
     "M.S in Teaching Physical Science (Physics)",
     "Master in Education Planning & Management",
     "Master in Technician Teacher Education",
-    "Master in Technician Teacher Education - ALL",
     "Master of Science in Education Planning and Administration",
     "Master of Science in Mathematics Education",
     "Master of Science in Science Education",
@@ -64,7 +54,6 @@ const courses = {
     "MS in Teaching Mathematics",
     "PH.D in Science Education(Chemistry)"
   ],
-  // ... Add remaining labels and their respective courses
   COM: ["Medicine"],
   CSM: [
     "BS Applied Mathematics",
@@ -107,72 +96,187 @@ const View = () => {
   const navigate = useNavigate();
   const [selectedLabel, setSelectedLabel] = useState(null);
   const [currentLabelName, setCurrentLabelName] = useState("");
+  const [labelLogs, setLabelLogs] = useState([]);
+  const [courseLogs, setCourseLogs] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [logs, setLogs] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
   const courseListRef = useRef(null);
 
-  const handleLabelClick = (label) => {
-    setSelectedLabel(courses[label] || []);
-    setCurrentLabelName(label); // Set current label name
-    setSelectedCourse(null); // Reset course selection
-    setLogs([]); // Clear logs when a new label is selected
-    if (courseListRef.current) courseListRef.current.scrollTop = 0;
+  const handleLabelClick = async (label) => {
+    if (label === "IGIS") {
+      // Special handling for IGIS
+      setSelectedLabel(null);
+      setCurrentLabelName("Master in Public Sector Innovation");
+      setLabelLogs([]);
+      setCourseLogs([]);
+  
+      try {
+        const response = await fetch(`http://localhost:8000/api/logs/label/IGIS`);
+        const data = await response.json();
+        if (data.success) {
+          setLabelLogs(data.logs);
+        }
+      } catch (error) {
+        console.error('Error fetching label logs:', error);
+      }
+    } else if (label === "SHS") {
+      // Special handling for SHS
+      setSelectedLabel(null);
+      setCurrentLabelName("Senior High School - STEM");
+      setLabelLogs([]);
+      setCourseLogs([]);
+  
+      try {
+        const response = await fetch(`http://localhost:8000/api/logs/label/SHS`);
+        const data = await response.json();
+        if (data.success) {
+          setLabelLogs(data.logs);
+        }
+      } catch (error) {
+        console.error('Error fetching label logs:', error);
+      }
+    } else if (["EMPLOYEES", "VISITORS"].includes(label)) {
+      // Handling for EMPLOYEES and VISITORS
+      setSelectedLabel(null);
+      setCurrentLabelName(label);  // Keep original label name for these two
+      setLabelLogs([]);
+      setCourseLogs([]);
+  
+      try {
+        const response = await fetch(`http://localhost:8000/api/logs/label/${label}`);
+        const data = await response.json();
+        if (data.success) {
+          setLabelLogs(data.logs);
+        }
+      } catch (error) {
+        console.error('Error fetching label logs:', error);
+      }
+    } else {
+      // Regular case for labels with courses
+      setSelectedLabel(courses[label] || []);
+      setCurrentLabelName(label);
+      setLabelLogs([]);
+      setSelectedCourse(null);
+      setCourseLogs([]);
+      if (courseListRef.current) courseListRef.current.scrollTop = 0;
+  
+      try {
+        const response = await fetch(`http://localhost:8000/api/logs/label/${label}`);
+        const data = await response.json();
+        if (data.success) {
+          setLabelLogs(data.logs);
+        }
+      } catch (error) {
+        console.error('Error fetching label logs:', error);
+      }
+    }
   };
-
   const handleCourseClick = async (course) => {
-    setSelectedCourse(course); // Set selected course to display logs for this course
+    setSelectedCourse(course);
     try {
       const response = await fetch(`http://localhost:8000/api/logs/course/${course}`);
       const data = await response.json();
       if (data.success) {
-        setLogs(data.logs); // Update logs with specific course data
+        setCourseLogs(data.logs);
       }
     } catch (error) {
       console.error('Error fetching course logs:', error);
     }
   };
 
-  const handleLogout = () => {
-    navigate('/');
+  const handleSearchChange = async (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    try {
+      const response = await fetch(`http://localhost:8000/api/logs?search=${query}`);
+      const data = await response.json();
+      if (data.success) {
+        setLabelLogs(data.logs); // Or set courseLogs if it's course-specific
+      }
+    } catch (error) {
+      console.error('Error searching logs:', error);
+    }
+  };
+
+  const handleDateChange = async (e) => {
+    const date = e.target.value;
+    setSelectedDate(date);
+
+    try {
+      const response = await fetch(`http://localhost:8000/api/logs/date?date=${date}`);
+      const data = await response.json();
+      if (data.success) {
+        setLabelLogs(data.logs);
+      }
+    } catch (error) {
+      console.error('Error fetching logs by date:', error);
+    }
+  };
+
+  const handleBackButtonClick = () => {
+    setSelectedLabel(null);
+    setCurrentLabelName("");
+    setSelectedCourse(null);
+    setCourseLogs([]);
   };
 
   return (
     <div className="main-container2">
       <div className="left-container2">
-        <div className="grid-container">
-          {labels.map((label, index) => (
-            <div
-              key={index}
-              className={`box ${label === "VISITORS" ? "visitor-box" : ""}`}
-              onClick={() => handleLabelClick(label)}
-            >
-              {label}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="right-container2" ref={courseListRef}>
-      <button className="generate-record-button">Generate Record</button>
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
-        
-        {/* Show list of courses if a label is selected and no course is yet selected */}
-        {selectedLabel && !selectedCourse && (
+        {selectedLabel && (
+          <button className="back-button" onClick={handleBackButtonClick}>
+            Back
+          </button>
+        )}
+        {!selectedLabel ? (
+          <div className="grid-container">
+            {labels.map((label, index) => (
+              <div
+                key={index}
+                className={`box ${label === "VISITORS" ? "visitor-box" : ""}`}
+                onClick={() => handleLabelClick(label)}
+              >
+                {label}
+              </div>
+            ))}
+          </div>
+        ) : (
           <div className="course-list">
             <h3>{currentLabelName}</h3>
             <ul>
               {selectedLabel.map((course, index) => (
                 <li key={index} onClick={() => handleCourseClick(course)}>
-                  {course} - 0
+                  {course}
                 </li>
               ))}
             </ul>
           </div>
         )}
+      </div>
 
-        {/* Show log table if a course is selected */}
-        {selectedCourse && (
+      <div className="right-container2">
+        {(currentLabelName || selectedCourse) && (
           <div>
-            <h2>Log Entries for {selectedCourse}</h2>
+            <h2>Log Entries for {currentLabelName || selectedCourse}</h2>
+
+            <div className="search-date-container">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                placeholder="Search by ID or Name"
+                className="search-bar"
+              />
+              <input
+                type="date"
+                value={selectedDate}
+                onChange={handleDateChange}
+                className="date-picker"
+              />
+            </div>
+
             <table className="logs-table">
               <thead>
                 <tr>
@@ -184,15 +288,21 @@ const View = () => {
                 </tr>
               </thead>
               <tbody>
-                {logs.map((log, index) => (
-                  <tr key={index}>
-                    <td>{log.Name}</td>
-                    <td>{log.PositionOrProgram || 'N/A'}</td>
-                    <td>{log.YearLevel || ''}</td>
-                    <td>{log.LogType}</td>
-                    <td>{new Date(log.LogTime).toLocaleString()}</td>
+                {(currentLabelName ? labelLogs : courseLogs).length === 0 ? (
+                  <tr>
+                    <td colSpan="5">No logs available</td>
                   </tr>
-                ))}
+                ) : (
+                  (currentLabelName ? labelLogs : courseLogs).map((log, index) => (
+                    <tr key={index}>
+                      <td>{log.Name}</td>
+                      <td>{log.PositionOrProgram || 'N/A'}</td>
+                      <td>{log.YearLevel || ''}</td>
+                      <td>{log.LogType}</td>
+                      <td>{new Date(log.LogTime).toLocaleString()}</td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
