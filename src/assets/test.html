@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('scannerData', (data) => {
+            console.log('Received data from scanner:', data);
+            document.getElementById('scannerOutput').innerText = data;
+        });
+    </script>
+</head>
+<body>
+    <h1>Scanner Output</h1>
+    <div id="scannerOutput"></div>
+</body>
+</html>

@@ -92,7 +92,7 @@ body, html {
   background-color: #1A1851;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start; /* Aligns the boxes to the left */
 }
 
 .box2 {

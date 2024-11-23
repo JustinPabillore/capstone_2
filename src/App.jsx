@@ -334,30 +334,35 @@ const fetchTotalExit = async () => {
         <span className="mid1-text">UNIVERSITY OF SCIENCE AND TECHNOLOGY OF SOUTHERN PHILIPPINES MONITORING SYSTEM</span>
       </div>
       <div className="mid2-container">
-        <div id="box-1" div className="box2"></div>
-        <div id="box-2" div className="box2"></div>
-        <div id="box-3" div className="box2"></div>
-        <div id="box-4" div className="box2"></div>
-        <div id="box-5" div className="box2">        
-          <input
-            type="text"
-            value={nameInput1}
-            onChange={(e) => setNameInput1(e.target.value)}
-            placeholder="Enter Name"
-            className="b1"
-          />
-          <button onClick={handleTimeInSubmit}>Time In</button>
+  <div className="left-box"> {/* Create a new box */}
+    <div id="box-1" className="box2"> {/* Box to the left */}
+      {/* Content for the box */}
+      <p>Log Details</p>
+      {/* You can include any log details or content you want here */}
+    </div>
+  </div>
 
-          <input
-            type="text"
-            value={nameInput2}
-            onChange={(e) => setNameInput2(e.target.value)}
-            placeholder="Enter Name"
-            className="b1"
-          />
-          <button onClick={handleTimeOutSubmit}>Time Out</button>
-        </div>
-      </div>
+  <div id="box-5" className="box2">        
+    <input
+      type="text"
+      value={nameInput1}
+      onChange={(e) => setNameInput1(e.target.value)}
+      placeholder="Enter Name"
+      className="b1"
+    />
+    <button onClick={handleTimeInSubmit}>Time In</button>
+
+    <input
+      type="text"
+      value={nameInput2}
+      onChange={(e) => setNameInput2(e.target.value)}
+      placeholder="Enter Name"
+      className="b1"
+    />
+    <button onClick={handleTimeOutSubmit}>Time Out</button>
+  </div>
+</div>
+
       <div className="bottom-container">
         <div className="bottom-left">Total Entry: {totalIn}</div>
         <div className="bottom-middle">Total Exit: {totalOut}</div>
