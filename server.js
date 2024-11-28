@@ -40,53 +40,102 @@ const ports = {
 
 Object.entries(ports).forEach(([portName, port]) => {
   port.on('data', async (data) => {
-    const logType = portName === 'COM3' ? 'Time In' : 'Time Out';
+    const logType = portName === 'COM3' ? 'Time Out' : 'Time In';
     const scannedData = data.toString().trim();
-    const scannedID = scannedData.split(/\s+/)[0]; // Extract the ID number
 
     console.log(`Data from ${portName}:`, scannedData);
 
     try {
-      // Check if the ID exists in ustpdata
-      const [rows] = await db.execute('SELECT * FROM ustpdata WHERE IDNumber = ?', [scannedID]);
+      // Check if the ID exists in ustpdata (Student logic)
+      const scannedID = scannedData.split(/\s+/)[0]; // Extract the ID number
+      const [studentRows] = await db.execute('SELECT * FROM ustpdata WHERE IDNumber = ?', [scannedID]);
 
-      if (rows.length === 0) {
-        console.error(`ID not found in ustpdata: ${scannedID}`);
+      if (studentRows.length > 0) {
+        const {
+          UID,
+          firstName,
+          middleInitial,
+          lastName,
+          Position,
+          IDNumber,
+          Program,
+          College,
+          yearLevel,
+          Address,
+          Purpose,
+        } = studentRows[0];
+
+        const position = Program ? 'Student' : Position; // If a Program exists, it's a student; otherwise, it's an employee.
+
+        const logTime = new Date();
+
+        await db.execute(
+          `INSERT INTO ustplogs (UID, firstName, middleInitial, lastName, Position, IDNumber, Program, College, yearLevel, Address, Purpose, LogTime, LogType)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            UID,
+            firstName,
+            middleInitial,
+            lastName,
+            position,
+            IDNumber,
+            Program,
+            College,
+            yearLevel,
+            Address,
+            Purpose,
+            logTime,
+            logType,
+          ]
+        );
+
+        console.log(`Successfully logged student: ${logType} for ${scannedID}`);
+        return; // Exit early if it's a student
+      }
+
+      // Employee logic
+      const nameParts = scannedData.split(' ');
+      const middleInitialIndex = nameParts.findIndex((part) => /^[A-Z]\.$/.test(part)); // Find middle initial like "M."
+      const lastNameIndex = middleInitialIndex + 1; // Assume the last name comes after the middle initial
+
+      // Extract first name (everything before the middle initial or last name)
+      const firstName = nameParts.slice(0, middleInitialIndex > 0 ? middleInitialIndex : nameParts.length - 1).join(' ');
+
+      if (!firstName) {
+        console.error('Failed to parse employee first name from scanned data:', scannedData);
         return;
       }
 
-      // Extract data from ustpdata
+      const [employeeRows] = await db.execute('SELECT * FROM ustpdata WHERE firstName = ?', [firstName]);
+
+      if (employeeRows.length === 0) {
+        console.error(`Employee first name not found in ustpdata: ${firstName}`);
+        return;
+      }
+
       const {
         UID,
-        firstName,
         middleInitial,
         lastName,
         Position,
-        IDNumber,
         Program,
         College,
         yearLevel,
         Address,
         Purpose,
-      } = rows[0];
+      } = employeeRows[0];
 
-      // Determine Position based on Program (or modify this logic if needed)
-      const position = Program ? 'Student' : Position; // If a Program exists, it's a student; otherwise, it's an employee.
-
-      // LogTime is the current timestamp
       const logTime = new Date();
 
-      // Insert data into ustplogs
       await db.execute(
-        `INSERT INTO ustplogs (UID, firstName, middleInitial, lastName, Position, IDNumber, Program, College, yearLevel, Address, Purpose, LogTime, LogType)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO ustplogs (UID, firstName, middleInitial, lastName, Position, Program, College, yearLevel, Address, Purpose, LogTime, LogType)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           UID,
           firstName,
           middleInitial,
           lastName,
-          position,
-          IDNumber,
+          Position || 'Employee', // Default to 'Employee' if Position is not provided
           Program,
           College,
           yearLevel,
@@ -97,7 +146,7 @@ Object.entries(ports).forEach(([portName, port]) => {
         ]
       );
 
-      console.log(`Successfully logged: ${logType} for ${scannedID}`);
+      console.log(`Successfully logged employee: ${logType} for ${firstName}`);
     } catch (err) {
       console.error('Error handling scanner data:', err.message);
     }
